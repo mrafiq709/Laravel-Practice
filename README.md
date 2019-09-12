@@ -11,7 +11,7 @@ for creating database and table class
 
 for creating table and database in localhost database:
 -------------------------------------------------------
-[Note: Create Table in Database Server -> PhpMyadmin. And add database name in .env File:DB_DATABASE=DB_NAME]
+Create Database in PhpMyadmin Local server. And add that database name in .env File:DB_DATABASE=DB_NAME
 
     php artisan migrate
 
