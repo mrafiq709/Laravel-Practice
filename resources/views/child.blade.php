@@ -120,19 +120,6 @@ The current UNIX timestamp is {{ time() }}.
     @endphp
 @endwhile
 
-<div class="row alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-
-  <div class="col s1" style="background:black">
-    <div class="material-icons">error_outline</div>
-  </div>
-  <div class="col s11">
-    <strong>Danger!</strong> <br/>Indicates a dangerous or potentially negative action.
-     <br/>Indicates a dangerous or potentially negative action.
-      <br/>Indicates a dangerous or potentially negative action.
-  </div>
-</div>
-
 <br/>
 <div class="line"></div>
 <h5><a href="https://laravel.com/docs/6.0/blade#displaying-data">References</a></h5>
