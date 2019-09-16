@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 class MainController extends Controller{
 
   public function home(){
-    return view("child", ['name' => 'ラフィク']);
+    return view("child")->with('records',['name' => 'ラフィク', 'records' => 2]);
   }
 
 }

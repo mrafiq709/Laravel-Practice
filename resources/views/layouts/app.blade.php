@@ -3,7 +3,8 @@
         <title>@yield('title')</title>
 
       @include('inc.materialized')
-      <link rel="stylesheet" href="/css/materialert.css">
+      <link rel="stylesheet" href="/css/alert.css">
+      <link rel="stylesheet" href="/css/main.css">
 
     </head>
     <body>
