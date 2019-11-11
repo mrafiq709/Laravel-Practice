@@ -10,7 +10,7 @@
 @section('content')
   <p>Hi, {{$records['name']}}</p>
 
-<!-- alert compnent. Also need to add the component in: Providers -> AppServiceProvider,php -> boot() method -->
+<!-- alert compnent. Also need to add the component in: Providers -> AppServiceProvider.php -> boot() method -->
 @alert(['type' => 'success', 'icon' => 'check'])
   Success !
 @endalert
