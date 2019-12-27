@@ -21,4 +21,6 @@ for creating model class
     
 error: Your requirements could not be resolved to an installable set of packages.
 ----------------------------------------------------------------------------------
+<a href="https://imgur.com/8DeuJHW"><img src="https://i.imgur.com/8DeuJHW.png" title="source: imgur.com" /></a><br/><br/>
+
     composer update --ignore-platform-reqs
