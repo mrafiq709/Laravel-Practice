@@ -4,6 +4,12 @@ Simple Laravel Command [including databse cretaion]
 create project
 ----------------
     composer create-project --prefer-dist laravel/laravel project_name
+    
+If mbstring or ext dom or xml missing:
+--------------------------------------
+    Sudo apt-get update
+    sudo apt-get install php-mbstring
+    sudo apt install php-xml
 
 for creating database and table class
 ----------------------------------------
