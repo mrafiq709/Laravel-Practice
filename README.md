@@ -30,3 +30,11 @@ error: Your requirements could not be resolved to an installable set of packages
 <a href="https://imgur.com/8DeuJHW"><img src="https://i.imgur.com/8DeuJHW.png" title="source: imgur.com" /></a><br/><br/>
 
     composer update --ignore-platform-reqs
+    
+Change Permission:
+---------------------
+    After installing fresh laravel project you might get permisson denied while you want see welcome page.
+    For this you have to change the ownership of your project vendor/ and storage/ Folder.
+    
+    sudo chown -R www-data:www-data vendor/
+    sudo chown -R www-data:www-data storage/
