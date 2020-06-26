@@ -42,14 +42,13 @@ Change Permission:
 Sometimes Laravel route is not found even it's exst in route list. The solution is:
 ------------------------------------------------------------------------------------
 
-    Two most common causes of this behavior are:
-
-    mod_rewrite not enabled
+Two most common causes of this behavior are:
+mod_rewrite not enabled
 
     sudo a2enmod rewrite && sudo service apache2 restart
-
-    AllowOverride is set to None, set it to All, assuming Apache2.4
     
-    sudo nano /etc/apache2/apache2.conf
+AllowOverride is set to None, set it to All, assuming Apache2.4
 
-    search for <Directory /var/www/> and change AllowOverride None to AllowOverride All, then save the file and restart apache
+    sudo nano /etc/apache2/apache2.conf
+    
+search for <Directory /var/www/> and change AllowOverride None to AllowOverride All, then save the file and restart apache
