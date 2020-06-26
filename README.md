@@ -39,7 +39,7 @@ Change Permission:
     sudo chown -R www-data:www-data vendor/
     sudo chown -R www-data:www-data storage/
     
-Sometimes Laravel route is not found even it's exst in route list. The solution is:
+Sometimes Laravel route is not found even it's exist in route list. The solution is:
 ------------------------------------------------------------------------------------
 
 Two most common causes of this behavior are:
