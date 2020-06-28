@@ -180,3 +180,7 @@ Now Run
     composer up
     
 **That's it !**
+
+ref 1: [https://medium.com/@setkyarwalar/setting-up-phpcs-on-laravel-908bccb82db]
+
+ref 2: [https://github.com/ashraf789/PHP-static-code-analysis]
