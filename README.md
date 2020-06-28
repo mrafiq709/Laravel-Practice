@@ -1,79 +1,169 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+## Simple Rest API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Features
+##### 1.    Laravel default authentication scaffolding
+##### 2.    Static code analysis with phpcs
+            |--> PHPCS
+            
+##### 3.    API authentication key
 
-## About Laravel
+## Details instructions
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Laravel default authentication scaffolding:
+--------------------------------------------
+    composer require laravel/ui
+    php artisan ui vue --auth
+    php artisan migrate
+ref:  https://laravel.com/docs/7.x/authentication
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Note: Sometimes Routs::auth() not found for apache configuration.
+Two most common causes of this behavior are: mod_rewrite not enabled
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    sudo a2enmod rewrite && sudo service apache2 restart
+    
+AllowOverride is set to None, set it to All, assuming Apache2.4
 
-## Learning Laravel
+    sudo nano /etc/apache2/apache2.conf
+    
+search for <Directory /var/www/> and change AllowOverride None to AllowOverride All, then save the file and restart apache
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Static code analysis with phpcs:
+---------------------------------
+## PHPCS
+    composer require --dev squizlabs/php_codesniffer
+    
+Now create a controller by artisan like **php artisan make:controller TestController** And modify controller like bellow.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    namespace AppHttpControllers;
+    use IlluminateHttpRequest;
+    class testController extends Controller
+    {
+        private function testTest(){
+        }
+    }
+    
+Run PPHCS on terminal
 
-## Laravel Sponsors
+    ./vendor/bin/phpcs app/Http/Controllers/TestController.php
+    
+Some error will display on terminal also you will get a message on bottom of report that some error could be fixed automatically To automatically fix those error run this command.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    ./vendor/bin/phpcbf app/Http/Controllers/TestController.php
+     
+But whenever we modified something we have to run this command again and again. So, if we setup a configuration file, we do not need to run
+everytime. Let's setup:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-- [云软科技](http://www.yunruan.ltd/)
+**Setup PHPCS Config [for linux os]**
+Create a file with name **phpcs.xml** in the root directory of your application and placed the bellow code.
 
-## Contributing
+    <?xml version="1.0"?>
+    <ruleset name="PSR2">    
+    <description>The PSR2 coding standard.</description>    
+    <rule ref="PSR2"/> <!-- Here checking code for PSR2 format -->
+    <!-- <rule ref="PEAR"/> --> <!-- Here checking code for PEAR format. Please comment out if you want to enable this format-->
+    
+    <!-- We want to check only app directory of the project -->
+    <file>app/</file>
+    
+    <!-- The directory listed bellows will be ommited for checking -->
+    <exclude-pattern>vendor</exclude-pattern>    
+    <exclude-pattern>resources</exclude-pattern>    
+    <exclude-pattern>database/</exclude-pattern>    
+    <exclude-pattern>storage/</exclude-pattern>    
+    <exclude-pattern>node_modules/</exclude-pattern>
+    </ruleset>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**Setup PHPCS Config [for windows os]**
 
-## Code of Conduct
+    <exclude-pattern>public</exclude-pattern>
+    
+add this extra line with above.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Now we can check our all app/ directory code by just a simple command
 
-## Security Vulnerabilities
+    ./vendor/bin/phpcs
+    
+Every time before you commit your changes. You have to run phpcbf and phpcs . Sometimes, you forget. And you have to fix phpcs coding standard problem and commit/push again. So lets setup Git Commit PreHook Config
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**Setup Git Commit PreHook Config [for linux os]**
+Create a folder with name **git-hooks** in root directory of your application and inside this folder create a file with name **pre-commit** [no extension].
+Place the bellow code in that file.
 
-## License
+    #!/bin/bash
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1\}$")
+
+    if [[ "$STAGED_FILES" = "" ]]; then
+      exit 0
+    fi
+
+    PASS=true
+
+    echo "\nValidating PHPCS:\n"
+
+    # Check for phpcs
+    which ./vendor/bin/phpcs &> /dev/null
+    if [[ "$?" == 1 ]]; then
+      echo "\t\033[41mPlease install PHPCS\033[0m"
+      exit 1
+    fi
+
+    RULESET=./phpcs.xml
+
+    for FILE in $STAGED_FILES
+    do
+      ./vendor/bin/phpcs --standard="$RULESET" "$FILE"
+
+      if [[ "$?" == 0 ]]; then
+        echo "\t\033[32mPHPCS Passed: $FILE\033[0m"
+      else
+        echo "\t\033[41mPHPCS Failed: $FILE\033[0m"
+        PASS=false
+      fi
+    done
+
+    echo "\nPHPCS validation completed!\n"
+
+    if ! $PASS; then
+      echo "\033[41mCOMMIT FAILED:\033[0m Your commit contains files that should pass PHPCS but do not. Please fix the PHPCS errors and try again.\n"
+      exit 1
+    else
+      echo "\033[42mCOMMIT SUCCEEDED\033[0m\n"
+    fi
+
+    exit $?
+    
+**Setup Git Commit PreHook Config [for windows os]**
+Just chnage the first line to
+
+        #!/bin/sh
+        
+One more thing- We have to add this pre-commit file in .git/hooks directory. There two option for adding this. I will show you both:
+##### Option 1:
+    cp git-hooks/pre-commit .git/hooks/pre-commit
+    chmod +x .git/hooks/pre-commit
+    
+##### Option 2:
+With composer.json file. Add bellow code in composer.json file inside "scripts":{} portion.
+
+    "post-update-cmd": [
+            "cp git-hooks/pre-commit .git/hooks/pre-commit",
+            "chmod a+x .git/hooks/pre-commit"
+        ],
+     "post-install-cmd": [
+            "cp git-hooks/pre-commit .git/hooks/pre-commit",
+            "chmod a+x .git/hooks/pre-commit"
+     ]
+     
+ **Note: please use git bash if you get any error like bellow**
+
+    > cp git-hooks/pre-commit .git/hooks/pre-commit
+    'cp' is not recognized as an internal or external command,
+    operable program or batch file.
+    Script cp git-hooks/pre-commit .git/hooks/pre-commit handling the post-install-cmd event returned with error code 1
+
+Now Run
+
+    composer up
+    
+**That's it !**
