@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
-    private function testTest(){
+    private function testTest()
+    {
         
     }
 }
