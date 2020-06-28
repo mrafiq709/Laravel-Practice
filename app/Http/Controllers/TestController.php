@@ -8,6 +8,5 @@ class TestController extends Controller
 {
     private function testTest()
     {
-        
     }
 }
