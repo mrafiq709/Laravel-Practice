@@ -17,6 +17,7 @@ Laravel default authentication scaffolding:
 ref:  https://laravel.com/docs/7.x/authentication
 
 Note: Sometimes Routs::auth() not found for apache configuration.
+
 Two most common causes of this behavior are: mod_rewrite not enabled
 
     sudo a2enmod rewrite && sudo service apache2 restart
@@ -46,14 +47,18 @@ Run PPHCS on terminal
 
     ./vendor/bin/phpcs app/Http/Controllers/TestController.php
     
-Some error will display on terminal also you will get a message on bottom of report that some error could be fixed automatically To automatically fix those error run this command.
+Some error will display on terminal also you will get a message on bottom of report that some error could be fixed automatically
+
+To automatically fix those error run this command.
 
     ./vendor/bin/phpcbf app/Http/Controllers/TestController.php
      
-But whenever we modified something we have to run this command again and again. So, if we setup a configuration file, we do not need to run
-everytime. Let's setup:
+But whenever we modified something we have to run this command again and again. So, if we setup a configuration file,
+
+we do not need to run everytime. Let's setup:
 
 **Setup PHPCS Config [for linux os]**
+
 Create a file with name **phpcs.xml** in the root directory of your application and placed the bellow code.
 
     <?xml version="1.0"?>
@@ -75,18 +80,24 @@ Create a file with name **phpcs.xml** in the root directory of your application 
 
 **Setup PHPCS Config [for windows os]**
 
-    <exclude-pattern>public</exclude-pattern>
-    
 add this extra line with above.
+
+    <exclude-pattern>public</exclude-pattern>
 
 Now we can check our all app/ directory code by just a simple command
 
     ./vendor/bin/phpcs
     
-Every time before you commit your changes. You have to run phpcbf and phpcs . Sometimes, you forget. And you have to fix phpcs coding standard problem and commit/push again. So lets setup Git Commit PreHook Config
+Every time before you commit your changes. You have to run phpcbf and phpcs . Sometimes, you forget. 
+
+And you have to fix phpcs coding standard problem and commit/push again. So lets setup Git Commit PreHook Config
 
 **Setup Git Commit PreHook Config [for linux os]**
-Create a folder with name **git-hooks** in root directory of your application and inside this folder create a file with name **pre-commit** [no extension].
+
+Create a folder with name **git-hooks** in root directory of your application and inside this folder 
+
+create a file with name **pre-commit** [no extension].
+
 Place the bellow code in that file.
 
     #!/bin/bash
@@ -134,6 +145,7 @@ Place the bellow code in that file.
     exit $?
     
 **Setup Git Commit PreHook Config [for windows os]**
+
 Just chnage the first line to
 
         #!/bin/sh
@@ -144,6 +156,7 @@ One more thing- We have to add this pre-commit file in .git/hooks directory. The
     chmod +x .git/hooks/pre-commit
     
 ##### Option 2:
+
 With composer.json file. Add bellow code in composer.json file inside "scripts":{} portion.
 
     "post-update-cmd": [
