@@ -52,3 +52,8 @@ AllowOverride is set to None, set it to All, assuming Apache2.4
     sudo nano /etc/apache2/apache2.conf
     
 search for <Directory /var/www/> and change AllowOverride None to AllowOverride All, then save the file and restart apache
+
+Key generate:
+-----------------
+    php artisan key:generate
+
