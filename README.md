@@ -33,8 +33,6 @@ search for <Directory /var/www/> and change AllowOverride None to AllowOverride 
 
 ----
 
-Static code analysis with phpcs:
----------------------------------
 ## PHPCS
     composer require --dev squizlabs/php_codesniffer
     
@@ -188,6 +186,8 @@ Now Run
 
 **END PHPCS !**
 
+----
+
 ## PHPMD
 
     composer require --dev phpmd/phpmd
@@ -269,6 +269,8 @@ Now we can run command like bellow:
     Note: If we do not write "> phpmd.text" it will be printed in command line.
     
 **END PHPMD !**
+
+----
     
 ref 1: [https://medium.com/@setkyarwalar/setting-up-phpcs-on-laravel-908bccb82db]
 
