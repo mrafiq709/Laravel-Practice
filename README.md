@@ -12,7 +12,7 @@
     - Retrive
     - Update
     - Delete
-    
+- Exception Handling
 - API Auth Token
 
 ## Details instructions
