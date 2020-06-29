@@ -1,0 +1,2 @@
+/var/www/returnrafiq.com/public_html/laravel_practice/app/Console/Kernel.php:25	Avoid unused parameters such as '$schedule'.
+/var/www/returnrafiq.com/public_html/laravel_practice/app/Http/Controllers/TestController.php:9	Avoid unused private methods such as 'testTest'.
