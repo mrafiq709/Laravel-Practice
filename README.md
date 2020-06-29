@@ -5,8 +5,14 @@
 - Static code analysis with phpcs
     - PHPCS
     - PHPMD
-            
-- API authentication key
+
+- Operation
+    - Create
+    - Retrive
+    - Update
+    - Delete
+    
+- API Auth Token
 
 ## Details instructions
 
