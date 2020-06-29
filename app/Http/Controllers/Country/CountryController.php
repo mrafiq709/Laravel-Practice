@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Country;
 
 use App\Http\Controllers\Controller;
 use App\Models\Country;
-use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * @desc    Country Class
@@ -30,7 +30,11 @@ class CountryController extends Controller
      */
     public function countryById($id)
     {
-        return response()->json(Country::find($id));
+        $country  = Country::find($id);
+        if (is_null($country)) {
+            return response()->json(["message" => "Not found  !"], 404);
+        }
+        return response()->json($country, 200);
     }
 
     /**
@@ -41,6 +45,16 @@ class CountryController extends Controller
      */
     public function countrySave(Request $request)
     {
+        $rules = [
+            "name"      =>  "required|min:3",
+            "flag_url"  =>  "required|min:5",
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
         $country = Country::create($request->all());
 
         return response()->json($country, 201); // 201 => created
@@ -50,13 +64,17 @@ class CountryController extends Controller
      * @desc    Update country
      *
      * @param   Request $request    Update Request
-     * @param   Country $country    Country Model
+     * @param   int $id    Country id
      * @return  Country json response
      */
-    public function countryUpdate(Request $request, Country $country)
+    public function countryUpdate(Request $request, $id)
     {
-        $country->update($request->all());
+        $country  = Country::find($id);
+        if (is_null($country)) {
+            return response()->json(["message" => "Not found  !"], 404);
+        }
 
+        $country->update($request->all());
         return response()->json($country, 200); // 200 => ok
     }
 
@@ -68,17 +86,15 @@ class CountryController extends Controller
      */
     public function countryDelete($id)
     {
-        if (Country::where('id', $id)->exists()) {
-            $country = Country::find($id);
-            $country->delete();
-    
-            return response()->json([
-              "message" => $country->name . " deleted"
-            ], 202);
+        $country  = Country::find($id);
+        if (is_null($country)) {
+            return response()->json(["message" => "Not found  !"], 404);
         }
 
+        $country->delete();
+    
         return response()->json([
-          "message" => "Country not found"
-        ], 404);
+            "message" => $country->name . " deleted"
+        ], 202);
     }
 }
