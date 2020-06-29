@@ -17,3 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Get all country
+Route::get('country', 'Country\CountryController@country');
+
+//GGet country by id
+Route::get('country/{id}', 'Country\CountryController@countryById');
+
+// Save country
+Route::post('country', 'Country\CountryController@countrySave');
+
+// Update country
+Route::put('country/{country}', 'Country\CountryController@countryUpdate');
+
+// Delete country
+Route::delete('country/{country}', 'Country\CountryController@countryDelete');
