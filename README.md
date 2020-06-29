@@ -20,6 +20,7 @@ Laravel default authentication scaffolding:
 ref:  https://laravel.com/docs/7.x/authentication
 
 **Note:** Sometimes Routs::auth() not found for apache configuration.
+
 {: .note}
 
 Two most common causes of this behavior are: mod_rewrite not enabled
