@@ -19,7 +19,8 @@ Laravel default authentication scaffolding:
     php artisan migrate
 ref:  https://laravel.com/docs/7.x/authentication
 
-Note: Sometimes Routs::auth() not found for apache configuration.
+> **Note:** Sometimes Routs::auth() not found for apache configuration.
+{: .note}
 
 Two most common causes of this behavior are: mod_rewrite not enabled
 
@@ -171,7 +172,8 @@ With composer.json file. Add bellow code in composer.json file inside "scripts":
             "chmod a+x .git/hooks/pre-commit"
      ]
      
- **Note: please use git bash if you get any error like bellow**
+ > **Note:** please use git bash if you get any error like bellow
+ {: .note}
 
     > cp git-hooks/pre-commit .git/hooks/pre-commit
     'cp' is not recognized as an internal or external command,
@@ -266,7 +268,8 @@ Now we can run command like bellow:
 
     vendor/bin/phpmd app text phpmd.xml > phpmd.text
     
-    Note: If we do not write "> phpmd.text" it will be printed in command line.
+> **Note:** If we do not write "> phpmd.text" it will be printed in command line.
+{: .note}
     
 **END PHPMD !**
 
