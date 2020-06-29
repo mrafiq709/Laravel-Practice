@@ -4,6 +4,7 @@
 ##### 1.    Laravel default authentication scaffolding
 ##### 2.    Static code analysis with phpcs
             |--> PHPCS
+            |--> PHPMD
             
 ##### 3.    API authentication key
 
@@ -181,6 +182,90 @@ Now Run
     
 **That's it !**
 
+**END PHPCS !**
+
+## PHPMD
+
+    composer require --dev phpmd/phpmd
+    
+Run PPHMD on terminal:
+
+    ./vendor/bin/phpmd app text cleancode,codesize,controversial,design,naming,unusedcode > phpmd.text
+    
+**Command Analysis**
+
+    vendor/bin/phpmd                                            =>  phpmd location
+    app                                                         =>  analysable code directory
+    text                                                        =>  output formate[html is also fine]
+    cleancode,codesize,controversial,design,naming,unusedcode   =>  rule to analysis code
+    > phpmd.text                                                =>  save output on phpmd.text file [it will save in current directory]
+
+We can save all rules on a xml file. Create **phpmd.xml** file in the root directory of application.
+Replace bellow code into phpmd.xml:
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <ruleset name="Laravel and similar phpmd ruleset"
+        xmlns="http://pmd.sf.net/ruleset/1.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+        xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+      <description>
+        Inspired by https://github.com/phpmd/phpmd/issues/137
+        using http://phpmd.org/documentation/creating-a-ruleset.html
+      </description>
+      <!-- se importan los rulesets, en este caso todos. -->
+      <rule ref="rulesets/cleancode.xml">
+        <exclude name="StaticAccess"/>
+      </rule>
+      <rule ref="rulesets/codesize.xml/CyclomaticComplexity"/>
+      <rule ref="rulesets/codesize.xml/NPathComplexity"/>
+      <rule ref="rulesets/codesize.xml/ExcessiveMethodLength"/>
+      <rule ref="rulesets/codesize.xml/ExcessiveClassLength"/>
+      <rule ref="rulesets/codesize.xml/ExcessiveParameterList"/>
+      <rule ref="rulesets/codesize.xml/ExcessivePublicCount"/>
+      <rule ref="rulesets/codesize.xml/TooManyFields"/>
+      <rule ref="rulesets/codesize.xml/TooManyMethods">
+          <properties>
+              <property name="maxmethods" value="30"/>
+          </properties>
+      </rule>
+      <rule ref="rulesets/codesize.xml/ExcessiveClassComplexity"/>
+      <rule ref="rulesets/controversial.xml"/>
+      <rule ref="rulesets/design.xml">
+          <exclude name="CouplingBetweenObjects"/>
+      </rule>
+      <!-- beware the façades yo. -->
+      <rule ref="rulesets/design.xml/CouplingBetweenObjects">
+          <properties>
+              <property name="minimum" value="20"/>
+          </properties>
+      </rule>
+      <!-- se importa naming y se excluye ShortVariable para ser ajustada despues. -->
+      <rule ref="rulesets/naming.xml">
+          <exclude name="ShortVariable"/>
+      </rule>
+      <rule ref="rulesets/naming.xml/ShortVariable"
+            since="0.2"
+            message="Avoid variables with short names like {0}. Configured minimum length is {1}."
+            class="PHPMD\Rule\Naming\ShortVariable"
+            externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable">
+          <priority>3</priority>
+          <properties>
+              <property name="minimum" description="Minimum length for a variable, property or parameter name" value="3"/>
+              <property name="exceptions" value="id,q,w,i,j,v,e,f,fp" />
+          </properties>
+      </rule>
+      <rule ref="rulesets/unusedcode.xml"/>
+    </ruleset>
+
+Now we can run command like bellow:
+
+    vendor/bin/phpmd app text phpmd.xml > phpmd.text
+    
+    Note: If we do not write "> phpmd.text" it will be printed in command line.
+    
+**END PHPMD !**
+    
 ref 1: [https://medium.com/@setkyarwalar/setting-up-phpcs-on-laravel-908bccb82db]
 
 ref 2: [https://github.com/ashraf789/PHP-static-code-analysis]
