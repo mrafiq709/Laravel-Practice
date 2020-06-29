@@ -1,14 +1,16 @@
 ## Simple Rest API
 
 ## Features
-##### 1.    Laravel default authentication scaffolding
-##### 2.    Static code analysis with phpcs
-            |--> PHPCS
-            |--> PHPMD
+- Laravel default authentication scaffolding
+- Static code analysis with phpcs
+    - PHPCS
+    - PHPMD
             
-##### 3.    API authentication key
+- API authentication key
 
 ## Details instructions
+
+----
 
 Laravel default authentication scaffolding:
 --------------------------------------------
@@ -28,6 +30,8 @@ AllowOverride is set to None, set it to All, assuming Apache2.4
     sudo nano /etc/apache2/apache2.conf
     
 search for <Directory /var/www/> and change AllowOverride None to AllowOverride All, then save the file and restart apache
+
+----
 
 Static code analysis with phpcs:
 ---------------------------------
