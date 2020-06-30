@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/*
 // Get all country
 Route::get('country', 'Country\CountryController@country');
 
@@ -32,3 +33,6 @@ Route::put('country/{id}', 'Country\CountryController@countryUpdate');
 
 // Delete country
 Route::delete('country/{id}', 'Country\CountryController@countryDelete');
+*/
+
+Route::apiResource('country', 'Country\CountryResource');
