@@ -22,7 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Get all country
 Route::get('country', 'Country\CountryController@country');
 
-//GGet country by id
+//Get country by id
 Route::get('country/{id}', 'Country\CountryController@countryById');
 
 // Save country
