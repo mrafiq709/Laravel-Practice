@@ -25,7 +25,7 @@
     -- laradock
     -- Laravel-Practice
 
-## installation
+## Installation
 
     Colne laradock:
     --------------
