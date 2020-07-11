@@ -27,7 +27,7 @@
 
 ## installation
 
-    Colne laradoc:
+    Colne laradock:
     --------------
     git clone https://github.com/Laradock/laradock.git
     cd laradock
