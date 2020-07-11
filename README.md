@@ -57,7 +57,7 @@
     php artisan db:seed
     
     
-    VHost configue:
+    VHost configure:
     ----------------
     add "127.0.0.1    rest.api.test" to /etc/hosts [if windows then add in windows host files]
     
