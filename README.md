@@ -185,7 +185,7 @@ With composer.json file. Add bellow code in composer.json file inside "scripts":
     operable program or batch file.
     Script cp git-hooks/pre-commit .git/hooks/pre-commit handling the post-install-cmd event returned with error code 1
 
- ***Note:** For Docker container if: "fatal: cannot run .git/hooks/pre-commit: No such file or directory" => then run bellow command*
+ ***Note:** For Docker container if: **fatal: cannot run .git/hooks/pre-commit: No such file or directory** => then run bellow command*
  
     cp .git/hooks/pre-commit /tmp/pre-commit
     tr -d '\r' < /tmp/pre-commit > .git/hooks/pre-commit
