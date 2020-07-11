@@ -14,6 +14,7 @@
     - Delete
 - Exception Handling
 - API Auth Token
+- BasicAuth middleware
 
 ## Details instructions
 
