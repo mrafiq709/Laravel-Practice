@@ -15,7 +15,7 @@ class AuthKey
      */
     public function handle($request, Closure $next)
     {
-        $token = $request->header('API-KEY');
+        $token = $request->header('x-api-key');
 
         if ($token != 'ABCD') {
             return response()->json(['message' => 'API Key not found'], 401); // 401 => Unathorize

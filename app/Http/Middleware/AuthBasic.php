@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use Exception;
 
 class AuthBasic
 {
@@ -17,11 +16,6 @@ class AuthBasic
      */
     public function handle($request, Closure $next)
     {
-
-        if (Auth::onceBasic()) {
-            return response()->json(['message' => 'Auth Failed !'], 401);
-        }
-
-        return $next($request);
+        return Auth::onceBasic() ? response()->json(['message' => 'Auth failes'], 401) : $next($request);
     }
 }
