@@ -187,7 +187,7 @@ With composer.json file. Add bellow code in composer.json file inside "scripts":
 
  ***Note:** For Docker container if: **fatal: cannot run .git/hooks/pre-commit: No such file or directory** => then run bellow command*
  
- **Explanation of error:** Your pre-commit file has extraneous carriage returns in it. This can happen if you edit the file in Windows and copy the file to a Linux computer.
+ **Explanation of error:** Your pre-commit file has extraneous carriage(external changes) returns in it. This can happen if you edit the file in Windows and copy the file to a Linux computer.
  
     cp .git/hooks/pre-commit /tmp/pre-commit
     tr -d '\r' < /tmp/pre-commit > .git/hooks/pre-commit
