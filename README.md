@@ -20,6 +20,113 @@
 
 ----
 
+## Project structure
+
+    -- laradock
+    -- Laravel-Practice
+
+## installation
+
+    Colne laradoc:
+    --------------
+    git clone https://github.com/Laradock/laradock.git
+    cd laradock
+    cp env-example .env
+
+    Clone project
+    ---------------
+    git clone -b rest-api https://github.com/mrafiq709/Laravel-Practice.git
+    cd Laravel-Practice
+    cp .env.example .env
+    
+    Database:
+    ------------
+    database name: db_rest
+    db_host: localhost
+    username: root
+    pass: root
+    
+    Docker:
+    -------
+    cd laradock
+    docker-compose up -d nginx mysql phpmyadmin redis workspace
+    docker exec -it laradock_workspace_1 bash
+    cd Laravel-Practice
+    composer up
+    php artisan migrate
+    php artisan db:seed
+    
+    
+    VHost configue:
+    ----------------
+    add "127.0.0.1    rest.api.test" to /etc/hosts [if windows then add in windows host files]
+    
+    [inside laradock_workspace_1 container]
+    
+    cd laradock/nginx/sites
+    cp app.conf.example rest-api.conf
+    nano rest-api.conf
+    
+    server {
+
+        listen 80;
+        listen [::]:80;
+
+        # For https
+        # listen 443 ssl;
+        # listen [::]:443 ssl ipv6only=on;
+        # ssl_certificate /etc/nginx/ssl/default.crt;
+        # ssl_certificate_key /etc/nginx/ssl/default.key;
+
+        server_name rest.api.test;
+        root /var/www/Laravel-Practice/public;
+        index index.php index.html index.htm;
+
+        location / {
+             try_files $uri $uri/ /index.php$is_args$args;
+        }
+
+        location ~ \.php$ {
+            try_files $uri /index.php =404;
+            fastcgi_pass php-upstream;
+            fastcgi_index index.php;
+            fastcgi_buffers 16 16k;
+            fastcgi_buffer_size 32k;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            #fixes timeouts
+            fastcgi_read_timeout 600;
+            include fastcgi_params;
+        }
+
+        location ~ /\.ht {
+            deny all;
+        }
+
+        location ~* \.(eot|ttf|woff|woff2)$ {
+            add_header Access-Control-Allow-Origin *;
+        }
+
+        location /.well-known/acme-challenge/ {
+            root /var/www/letsencrypt/;
+            log_not_found off;
+        }
+    }
+    
+    press: ctrl + x
+    write: yes
+    press enter
+    exit
+    
+    cd laradock
+    docker-compose down
+    docker-compose up
+    
+Now http://rest.api.test
+    
+----
+
+----
+
 Laravel default authentication scaffolding:
 --------------------------------------------
     composer require laravel/ui
