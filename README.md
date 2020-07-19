@@ -41,10 +41,12 @@
     
     Database:
     ------------
-    database name: db_rest
-    db_host: localhost
-    username: root
-    pass: root
+    DB_CONNECTION=mysql
+    DB_HOST=mysql
+    DB_PORT=3306
+    DB_DATABASE=db_rest
+    DB_USERNAME=root
+    DB_PASSWORD=root
     
     Docker:
     -------
