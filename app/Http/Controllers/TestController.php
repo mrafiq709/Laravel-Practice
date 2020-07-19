@@ -28,6 +28,12 @@ use Illuminate\Http\Request;
  */
 class TestController extends Controller
 {
+
+    /**
+     * 
+     */
+    private $_tt;
+
     /**
      * Define template file.
      * 
