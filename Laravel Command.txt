@@ -12,3 +12,9 @@ php artisan migrate
 // for creating model class
 php artisan make:model model_name
 
+Route List:
+---------------
+
+php artisan route:list
+php artisan route:list --name=YourRouteNAme
+
