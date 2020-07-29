@@ -57,3 +57,7 @@ Key generate:
 -----------------
     php artisan key:generate
 
+Route List:
+---------------
+    php artisan route:list
+    php artisan route:list --name=YourRouteNAme
