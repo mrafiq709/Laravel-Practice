@@ -61,6 +61,14 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-update-cmd": [
+            "cp git-hooks/pre-commit .git/hooks/pre-commit",
+            "chmod a+x .git/hooks/pre-commit"
+        ],
+        "post-install-cmd": [
+            "cp git-hooks/pre-commit .git/hooks/pre-commit",
+            "chmod a+x .git/hooks/pre-commit"
         ]
     }
 }
