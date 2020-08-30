@@ -13,4 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PushNotificationController@index');
+Route::name('push-notifications')->get('/push-notifications', 'PushNotifications\PushNotificationController@index');
+Route::name('push-notification.create')->get('/push-notifications/create','PushNotifications\PushNotificationController@create');
+Route::name('push-notification.store')->post('/push-notification/store', 'PushNotifications\PushNotificationController@store');

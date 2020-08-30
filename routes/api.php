@@ -18,4 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('device', 'Api\DeviceController');
+Route::apiResource('device', 'PushNotifications\Api\DeviceController');
