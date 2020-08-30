@@ -11,6 +11,10 @@ import android.widget.Toast;
 import com.example.pushnotification.interfaces.ApiServices;
 import com.example.pushnotification.model.Device;
 import com.example.pushnotification.network.RetrofitClientInstance;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.Collection;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Device> call, Response<Device> response) {
                 if (response.isSuccessful()){
-                    Log.d("rafiq", "Response: " + response.body().getMessage());
+                    Log.d("rafiq", "Response: " + new Gson().toJson(response.body()));
                 }
             }
 
