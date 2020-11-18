@@ -1,13 +1,13 @@
 {
-    "name": "apility/laravel-fcm",
+    "name": "rafiqul709/laravel-fcm",
     "description": "Laravel / Lumen package for Firebase Cloud Messaging ",
     "keywords": ["laravel", "lumen", "firebase", "notification", "push", "fcm", "firebase cloud messaging"],
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Nicolas Brosy",
-            "email": "nicolas.brosy@gmail.com"
+            "name": "Md Rafiqul Islam",
+            "email": "rafiqul@scuti.asia"
         }
     ],
     "require": {
