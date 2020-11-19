@@ -1,12 +1,12 @@
 {
-    "name": "rafiqul709/laravel-fcm",
+    "name": "scuti/laravel-fcm",
     "description": "Laravel / Lumen package for Firebase Cloud Messaging ",
     "keywords": ["laravel", "lumen", "firebase", "notification", "push", "fcm", "firebase cloud messaging"],
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Md Rafiqul Islam",
+            "name": "scuti.asia",
             "email": "rafiqul@scuti.asia"
         }
     ],
