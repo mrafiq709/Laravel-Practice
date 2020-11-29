@@ -4,6 +4,7 @@
  * @apiGroup Device
  *
  * @apiUse AuthHeader
+ * @apiUse UnAuthorized
  *
  * @apiSuccessExample {json} Success Example:
  * "Device": [
@@ -24,6 +25,7 @@
  * @apiGroup Device
  *
  * @apiUse AuthHeader
+ * @apiUse UnAuthorized
  * 
  * @apiParam {String="android", "ios"} type required
  * @apiParam {String} device_token required
