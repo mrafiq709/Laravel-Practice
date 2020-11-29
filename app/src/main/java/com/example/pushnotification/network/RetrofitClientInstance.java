@@ -11,7 +11,7 @@ public class RetrofitClientInstance {
     private static Retrofit retrofit;
 
     // Predefined BASE_URL
-    private static final String BASE_URL = "http://192.168.0.102/";
+    private static final String BASE_URL = "http://192.168.0.7/";
 
     /**
      * static -> So that we can access this method from all class
