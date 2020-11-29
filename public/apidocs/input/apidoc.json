@@ -1,0 +1,16 @@
+{
+  "name": "Push Notification",
+  "version": "1.0.0",
+  "description": "API Details",
+  "title": "Push Notification API",
+  "order": [
+    "Common"
+  ],
+  "footer": {
+    "title": "Copyright @2020"
+  },
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  }
+}
