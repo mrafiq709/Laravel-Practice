@@ -9,7 +9,7 @@
 - Clic Add store
 - Select development
 
-Fill the from
+Fill the form
 - store name
 - store url (anything as your wish, your custom shop url)
 - Enter new store password
@@ -27,7 +27,7 @@ click Save
 
 General settings:
 - App name: Anything
-- App URL: Your Laravel project route which called: public static function authorizeResponse() see below #7 for descriptions of this function
+- App URL: Your Laravel project route which called: public static function authorizeResponse() see below #6 for descriptions of this function
 
 Redirection URLs:
 - same as App URL
@@ -35,7 +35,7 @@ Redirection URLs:
 click Create app Button
 ```
 
-5. Copy **API keys** and **API secret key** from just cretaed shopify App and save in .env
+4. Copy **API keys** and **API secret key** from just cretaed shopify App and save in .env
 ```
 SHOPIFY_API_KEY=API keys
 SHOPIFY_API_SECRET=API secret key
@@ -45,11 +45,11 @@ SHOPIFY_API_SCOPES=read_orders,read_products,read_inventory,write_products,write
 
 ```
 
-6. Install package: https://github.com/osiset/Basic-Shopify-API
+5. Install package: https://github.com/osiset/Basic-Shopify-API
 ```
 composer require osiset/basic-shopify-api
 ```
-7. Connect With Laravel Project
+6. Connect With Laravel Project
 
 Athentication: Create this function to get the access token and save in DB
 ```
@@ -98,7 +98,7 @@ Athentication: Create this function to get the access token and save in DB
   }
 ```
 
-8. Install Sopify App to Sopify store
+7. Install Sopify App to Sopify store
 ```
 - Select Apps from sidebar
 - Select Your App from the list
@@ -108,9 +108,9 @@ Athentication: Create this function to get the access token and save in DB
 
 ```
 
-9. You can also see your Installed apps in store admin page: Apps menu from sidebar
+8. You can also see your Installed apps in store admin page: Apps menu from sidebar
 
-10. Get data from shopify:
+9. Get data from shopify:
 ```
 public static function apiConnect($db_shop)
   {
