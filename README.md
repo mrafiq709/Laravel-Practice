@@ -98,7 +98,19 @@ Athentication: Create this function to get the access token and save in DB
   }
 ```
 
-Get data from shopify:
+8. Install Sopify App to Sopify store
+```
+- Select Apps from sidebar
+- Select Your App from the list
+- Scroll down and click Select store button from Test your app section
+- Select your store (It will redirect you to store admin page)
+- Click install button (It will redirect you to your laravel project and will hit authorizeResponse() function)
+
+```
+
+9. You can also see your Installed apps in store admin page: Apps menu from sidebar
+
+10. Get data from shopify:
 ```
 public static function apiConnect($db_shop)
   {
