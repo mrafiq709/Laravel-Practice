@@ -24,7 +24,7 @@ compact('user')
     alert(dataSet[0]['count']);
 </script>
 ```
-Pass variable to translation
+Replacing Parameters In Translation Strings
 -------------------------------
 .php file
 ```
@@ -53,3 +53,4 @@ config.php file
             ],
         ],
 ```
+https://laravel.com/docs/8.x/localization#replacing-parameters-in-translation-strings
