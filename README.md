@@ -23,4 +23,32 @@ compact('user')
     var dataSet = @json($users ?? '');
     alert(dataSet[0]['count']);
 </script>
-``
+```
+##### Pass variable to translation
+.php file
+```
+$subject = trans('constants.feedback.email.subjects.start_processing', ['code' => $feedback->code], 'en');
+
+en:
+ 'email' => [
+            'subjects' => [
+                config('constants.feedback.email.subjects.start_processing') => 'NOTICE OF RECEIVING FEEDBACK - REFERENCE NUMBER: ":code"',
+            ],
+        ],
+
+vn:
+'email' => [
+            'subjects' => [
+                config('constants.feedback.email.subjects.start_processing') => 'THÔNG BÁO TIẾP NHẬN FEEDBACK– SỐ THAM CHIẾU: ":code"',
+            ],
+        ],
+```
+
+config.php file
+```
+ 'email' => [
+            'subjects' => [
+                'start_processing' => 'start_processing',
+            ],
+        ],
+```
