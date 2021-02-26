@@ -24,7 +24,8 @@ compact('user')
     alert(dataSet[0]['count']);
 </script>
 ```
-##### Pass variable to translation
+Pass variable to translation
+-------------------------------
 .php file
 ```
 $subject = trans('constants.feedback.email.subjects.start_processing', ['code' => $feedback->code], 'en');
