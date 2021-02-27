@@ -14,6 +14,11 @@ https://laravel.com/docs/8.x/blade#components
 php artisan make:component ComponentName
 
 ```
+
+Laravel-Horizon
+-----------------
+link: https://www.codecheef.org/article/laravel-queues-example-using-redis-and-horizon
+
 ##### Refernces
 https://laravel.com/docs/8.x/mix#tailwindcss
 https://tailwindcss.com/docs/guides/laravel
