@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,4 @@ Route::get('/', function () {
 });
 
 Route::get('test', [MailController::class, 'index']);
+Route::get('orders',[OrderController::class, 'index']);
