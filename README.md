@@ -18,6 +18,7 @@ php artisan make:component ComponentName
 Repositories & Custom Service Provider
 -----------------------------------------
 Folder Structure:
+```
 app
 |__Repositories
 |       |__OrderInterface.php
@@ -29,6 +30,7 @@ app
 |
 |__config
      |__app.php
+```
 
 1. Create OrderInterface.php
 ```
@@ -137,3 +139,4 @@ update your repository name.
 ##### Refernces
 https://laravel.com/docs/8.x/mix#tailwindcss
 https://tailwindcss.com/docs/guides/laravel
+https://www.youtube.com/watch?v=-uSIiqEZ-EE&list=LL&index=1
