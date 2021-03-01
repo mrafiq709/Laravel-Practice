@@ -34,7 +34,7 @@ public function run()
  composer require codeception/codeception --dev
  composer exec codecept bootstrap
  cp .env .env.testing
- 
+ ```
  Functional Tests:
  ------------------
  To start you need to configure **tests/functional.suite.yml** to use Laravel5 module:
@@ -96,3 +96,5 @@ run it by the following command here :
 vendor/bin/codecept run --coverage-html
 ```
   
+##### Reference:
+https://medium.com/dot-lab/automatic-testing-laravel-project-use-codeception-f79fb19b9626
