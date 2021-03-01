@@ -11,6 +11,24 @@ Schema::create('items', function (Blueprint $table) {
         
 php artisan migrate
 ```
+Make item Model:
+```
+php artisan make:model Item
+
+class Item extends Model
+{
+    protected $table = "items";
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'description', 'created_at', 'updated_at'
+    ];
+}
+```
 ```
 php artisan make:seeder ItemsTableSeeder
 
