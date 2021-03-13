@@ -108,7 +108,7 @@ class LoginController extends Controller
     }
 }
 ```
-Get all users:
+UserController:
 ---------------
 ```php
 <?php
@@ -132,7 +132,7 @@ class UserController extends Controller
     }
  }
 ```
-Go to ***routes/api.php*** and add the login route:
+Routes:
 ---------------------------------------------------
 ```php
 Route::prefix('/user')->group(function () {
@@ -140,8 +140,8 @@ Route::prefix('/user')->group(function () {
     Route::middleware('auth:api')->get('/all', 'api\v1\user\UserController@index');
 });
 ```
-Test API Postman:
------------------
+API Test (Postman):
+-------------------
 Get Access Token:
 ```diff
 - POST: https://default.test/api/v1/user/login
@@ -189,4 +189,5 @@ response:
 ##### references:
 
 https://www.youtube.com/watch?v=R3Hec0_U2Cs&list=LL_bgeF1yjKHFtFH1gM8sojA&index=6&t=1129s
+
 https://laravel.com/docs/8.x/passport
