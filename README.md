@@ -107,6 +107,13 @@ class LoginController extends Controller
     }
 }
 ```
+Go to ***routes/api.php*** and add the login route:
+```php
+Route::prefix('/user')->group(function () {
+    Route::post('/login', 'api\v1\LoginController@login');
+    Route::middleware('auth:api')->get('/all', 'api\v1\user\UserController@index');
+});
+```
 ##### references:
 
 https://www.youtube.com/watch?v=R3Hec0_U2Cs&list=LL_bgeF1yjKHFtFH1gM8sojA&index=6&t=1129s
