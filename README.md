@@ -11,7 +11,7 @@ Create Client ID & Client Secret
 php artisan passport:install
 ```
 After running the ***passport:install*** command, add the 
-```php Laravel\Passport\HasApiTokens``` trait to your ```php App\Models\User``` model.
+***Laravel\Passport\HasApiTokens*** trait to your ***App\Models\User*** model.
 ```php
 <?php
 
@@ -27,6 +27,43 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 }
 ```
+Next, you should call the ***Passport::routes*** method within the **boot** method of your ***App\Providers\AuthServiceProvider***
+```php
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use Laravel\Passport\Passport;
+
+class AuthServiceProvider extends ServiceProvider
+{
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected $policies = [
+        'App\Models\Model' => 'App\Policies\ModelPolicy',
+    ];
+
+    /**
+     * Register any authentication / authorization services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->registerPolicies();
+
+        if (! $this->app->routesAreCached()) {
+            Passport::routes();
+        }
+    }
+}
+```
+Finally, in your application's ``` - config/auth.php``` configuration file, you should set the ***driver*** option of the api authentication guard to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:
 
 ##### references:
 
