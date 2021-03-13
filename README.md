@@ -78,7 +78,36 @@ Finally, in your application's
     ],
 ],
 ```
+Get access token for client:
+```php
+<?php
 
+namespace App\Http\Controllers\api\v1;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class LoginController extends Controller
+{
+    public function login(Request $request) {
+
+        $login = $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string'
+        ]);
+
+        if(! Auth::attempt($login)) {
+            return response(['message' => 'Invalid credential']);
+        }
+
+        $accesstoken = Auth::user()->createToken('authToken')->accessToken;
+
+        return response(['user' => Auth::user(), 'access_token' => $accesstoken]);
+    }
+}
+```
 ##### references:
 
 https://www.youtube.com/watch?v=R3Hec0_U2Cs&list=LL_bgeF1yjKHFtFH1gM8sojA&index=6&t=1129s
+https://laravel.com/docs/8.x/passport
