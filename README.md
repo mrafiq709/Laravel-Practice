@@ -6,7 +6,7 @@ search in telegram @BotFather then
 
 type `/newbot`
 
-then `choose a name for your bo`
+then `choose a name for your bot`
 
 then `choose a username for your bot`
 
