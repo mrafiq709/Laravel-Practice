@@ -1,7 +1,7 @@
 # Instructions
 
 ```
-npx create-react-app fire_client
+npx create-react-app push-notification-web
 ```
 
 ## Details:
