@@ -12,7 +12,7 @@ function receivePushNotification(event) {
 
   console.log(event.data.json());
 
-  const { image, tag, url, title, text } = event.data.json().data;
+  const { data, image, tag, url, title, text } = event.data.json().data;
 
   const options = {
     data: url,
@@ -24,7 +24,10 @@ function receivePushNotification(event) {
     badge: "https://spyna.it/icons/favicon.ico",
     actions: [{ action: "Detail", title: "View", icon: "https://via.placeholder.com/128/ff0000" }]
   };
-  event.waitUntil(self.registration.showNotification(title, options));
+  if(data === 'a_data')
+  {
+    event.waitUntil(self.registration.showNotification(title, options));
+  }
 }
 
 function openPushNotification(event) {
