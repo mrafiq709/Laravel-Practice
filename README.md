@@ -111,7 +111,7 @@ modules:
 ```
 run it by the following command here :
 ```
-vendor/bin/codecept run --coverage-html
+vendor/bin/codecept run unit,api --coverage-html
 ```
   
 ##### Reference:
