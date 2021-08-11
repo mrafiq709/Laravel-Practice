@@ -315,6 +315,55 @@ class ApiTester extends Actor
     }
 }
  ```
+ Create APi Test:
+ -------------------
+ ```
+ php vendor/bin/codecept generate:cest api CreateUser
+ ```
+ ```php
+ <?php
+
+use Codeception\Util\HttpCode;
+use Faker\Factory;
+
+class CreateUserCest
+{
+    protected $uri = '/api/v2/users';
+    /**
+     * @var false|string|null
+     */
+    private $token;
+
+    public function _before(ApiTester $I)
+    {
+        $this->token = $I->getAccessToken();
+
+        $I->httpHeader($this->token);
+
+        $faker = Factory::create();
+        $I->mockUser($faker);
+    }
+
+    /**
+     * @param ApiTester $I
+     *
+     * @throws Exception
+     */
+    public function userIndex(ApiTester $I)
+    {
+        $I->sendGet($this->uri);
+
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeResponseIsJson();
+
+        $count = $I->grabDataFromResponseByJsonPath('$.data.total')[0];
+        $total = User::all()->count();
+
+        $I->assertEquals($count, $total);
+    }
+}
+ ```
+ 
  run it by the following command here :
 ```
 vendor/bin/codecept run api --coverage-html
