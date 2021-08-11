@@ -125,6 +125,7 @@ composer.json:
         "codeception/module-rest": "^1.3",
     }
 ```
+
 Configure **tests/api.suite.yml**:
 ----------------------------------
    ```
@@ -143,9 +144,59 @@ Configure **tests/api.suite.yml**:
             part: ORM
             environment_file: .env.testing
    ```
- App ApiTester Class:
+ Add Api.php Class:
+ -------------------
+  ```
+ tests
+    |_ _support
+          |_Helper
+               |_Api.php
+ ```
+ ```php
+ <?php
+namespace Helper;
+
+use Codeception\Exception\ModuleException;
+
+// here you can define custom actions
+// all public methods declared in helper class will be available in $I
+
+class Api extends \Codeception\Module
+{
+
+    /**
+     * @param $abstract
+     * @param $instance
+     *
+     * @return bool
+     */
+    public function bindInstance($abstract, $instance)
+    {
+        try {
+            $laravel = $this->getModule('Laravel5');
+            /**
+             * @var Application $app
+             */
+            $app = $laravel->getApplication();
+            $app->instance($abstract, $instance);
+            $laravel->setApplication($app);
+        } catch (ModuleException $e) {
+            return false;
+        }
+    }
+
+}
+
+ ```
+ 
+ Add ApiTester.php Class:
  ---------------------
- ***tests/_support/ApiTester.php***
+ ```
+ tests
+    |_ _support
+          |_ApiTester.php
+ ```
+
  ```php
  <?php
 
