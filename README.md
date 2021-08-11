@@ -65,7 +65,9 @@ modules:
               environment_file: .env.testing
         - \Helper\Functional
  ```
- Also yo need to configure tests/unit.suite.yml to use Laravel5 module:
+  Unit Tests:
+ ------------------
+ Configure **tests/unit.suite.yml** to use Laravel5 module:
  ```
  actor: UnitTester
 modules:
@@ -78,7 +80,9 @@ modules:
             cleanup: true
             run_database_migrations: true
   ```
-  And then, build with following command :
+   
+  Build config :
+  ---------------
   ```
   composer require codeception/module-laravel5 --dev
   vendor/bin/codecept build
@@ -111,8 +115,155 @@ modules:
 ```
 run it by the following command here :
 ```
-vendor/bin/codecept run unit,api --coverage-html
+vendor/bin/codecept run unit --coverage-html
 ```
-  
+API Test:
+----------
+composer.json:
+```json
+    "require-dev": {
+        "codeception/module-rest": "^1.3",
+    }
+```
+Configure **tests/api.suite.yml**:
+----------------------------------
+   ```
+   actor: ApiTester
+   modules:
+      enabled:
+        - \Helper\Api
+        - Asserts
+        - REST:
+            depends: Laravel5
+            part: Json
+        - Laravel5:
+            cleanup: true
+            run_database_migrations: true
+            disable_middleware: false
+            part: ORM
+            environment_file: .env.testing
+   ```
+ App ApiTester Class:
+ ---------------------
+ ***tests/_support/ApiTester.php***
+ ```php
+ <?php
+
+use Codeception\Actor;
+use Codeception\Step\Action;
+use Faker\Generator;
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
+
+/**
+ * Inherited Methods
+ * @method void wantToTest($text)
+ * @method void wantTo($text)
+ * @method void execute($callable)
+ * @method void expectTo($prediction)
+ * @method void expect($prediction)
+ * @method void amGoingTo($argumentation)
+ * @method void am($role)
+ * @method void lookForwardTo($achieveValue)
+ * @method void comment($description)
+ * @method void pause()
+ *
+ * @SuppressWarnings(PHPMD)
+ */
+class ApiTester extends Actor
+{
+    use _generated\ApiTesterActions;
+
+    /**
+     * @return false|string|null
+     */
+    public function getAccessToken()
+    {
+        return env('ACCESS_TOKEN', null);
+    }
+
+    /**
+     * Set HTTP headers to the ApiTester
+     * To use API Key for authorizing, pass true to $apiKey
+     * To use access token for authorizing, pass false to $apiKey
+     *
+     * @param      $token
+     * @param bool $apiKey
+     */
+    public function httpHeader($token, $apiKey = false)
+    {
+        if ($apiKey) {
+            $this->haveHttpHeader('X-Authorization', $token);
+        } else {
+            $this->haveHttpHeader('Authorization', 'Bearer ' . $token);
+        }
+        $this->haveHttpHeader('accept', 'application/json');
+        $this->haveHttpHeader('content-type', 'application/json');
+    }
+
+    /**
+     * Mock the client
+     *
+     * @param int $num
+     *
+     * @throws Exception
+     */
+    public function mockClient($num = 1)
+    {
+        $responses = [];
+        for ($i = 0; $i < $num; $i++) {
+            $responses[] = new Response(200, [], json_encode(['ok' => true]));
+        }
+        $mock = new MockHandler($responses);
+        $handler = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handler]);
+        $this->bindInstance(Client::class, $client);
+    }
+
+    public function mockUser(Generator $faker)
+    {
+        $responses = [
+            new Response(200, [], json_encode([
+                "id" => $faker->randomDigitNotZero(),
+                "name" => $faker->name,
+                "email" => $faker->email,
+                "password" => $faker->password
+            ]))
+        ];
+
+        $mock = new MockHandler($responses);
+        $handler = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handler]);
+        $this->bindInstance(Client::class, $client);
+    }
+
+    /**
+     * [!] Method is generated. Documentation taken from corresponding module.
+     *     *
+     *
+     * @param $abstract
+     * @param $instance
+     *
+     * @return mixed|null
+     * @throws Exception
+     * @see \Helper\Api::bindInstance()
+     */
+    public function bindInstance($abstract, $instance)
+    {
+        return $this->getScenario()->runStep(new Action('bindInstance', func_get_args()));
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function cleanupMongoDb()
+    {
+        
+    }
+}
+ ```
+ 
 ##### Reference:
 https://medium.com/dot-lab/automatic-testing-laravel-project-use-codeception-f79fb19b9626
