@@ -267,6 +267,7 @@ class ApiTester extends Actor
  run it by the following command here :
 ```
 vendor/bin/codecept run api --coverage-html
+```
  
 ##### Reference:
 https://medium.com/dot-lab/automatic-testing-laravel-project-use-codeception-f79fb19b9626
