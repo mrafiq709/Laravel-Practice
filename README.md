@@ -93,4 +93,5 @@ class PermissionController extends Controller
 ##### Refernces
 
 https://spatie.be/docs/laravel-permission/v5/installation-laravel
+
 https://github.com/spatie/laravel-permission
