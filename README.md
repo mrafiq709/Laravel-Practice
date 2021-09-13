@@ -3,7 +3,7 @@ Simple Laravel Command [including databse cretaion]
 
 create project
 ----------------
-    composer create-project --prefer-dist laravel/laravel project_name
+    composer create-project --prefer-dist laravel/laravel project_name "7.29"
     
 If mbstring or ext dom or xml missing:
 --------------------------------------
