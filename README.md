@@ -1,56 +1,96 @@
-# Laravel-Practice
-Laravel Template
+# Laravel-Permission-Spatie
 
+Laravel Permission Spatie
 
-Access PHP Object in Javascript
-------------------------------------
-
-##### In controller:
 ```
-compact('user')
-^ Illuminate\Support\Collection {#1839 ▼
-  #items: array:1 [▼
-    0 => {#1831 ▼
-      +"count": 543
+composer show spatie/laravel-permission
+composer require spatie/laravel-permission
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+php artisan config:clear
+php artisan migrate
+```
+
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
+class CreateRolePermission extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        $guard = 'api';
+        Role::create(['name' => 'admin', 'guard_name' => $guard]);
+        Permission::create(['name' => 'admin.view', 'guard_name' => $guard]);
     }
-  ]
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
 }
 ```
 
-##### In Javascript
 ```
-<script>
-    var dataSet = @json($users ?? '');
-    alert(dataSet[0]['count']);
-</script>
-```
-Replacing Parameters In Translation Strings
--------------------------------
-.php file
-```
-$subject = trans('constants.feedback.email.subjects.start_processing', ['code' => $feedback->code], 'en');
-
-en:
- 'email' => [
-            'subjects' => [
-                config('constants.feedback.email.subjects.start_processing') => 'NOTICE OF RECEIVING FEEDBACK - REFERENCE NUMBER: ":code"',
-            ],
-        ],
-
-vn:
-'email' => [
-            'subjects' => [
-                config('constants.feedback.email.subjects.start_processing') => 'THÔNG BÁO TIẾP NHẬN FEEDBACK– SỐ THAM CHIẾU: ":code"',
-            ],
-        ],
+php artisan migrate
 ```
 
-config.php file
+```php
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\User;
+use Illuminate\Http\Response;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Request;
+use Auth;
+
+class PermissionController extends Controller
+{
+
+    /**
+     * Add Permission
+     */
+    public function add(Request $request)
+    {
+        $user = User::where('email', $request->email)->get()->first();
+        $role = Role::findByName('admin');
+        $user->makeHidden('email');
+        $user->assignRole($role);
+        $user->givePermissionTo('admin.view');
+        $user->roles();
+
+        return request()->json($user->toArray());
+    }
+
+    /**
+     * Retrive Permission
+     */
+    public function user(Request $request)
+    {
+        $user = Auth::user();
+        $user->roles;
+        $user->permissions;
+
+        return request()->json($user->toArray());
+    }
+}
 ```
- 'email' => [
-            'subjects' => [
-                'start_processing' => 'start_processing',
-            ],
-        ],
-```
-https://laravel.com/docs/8.x/localization#replacing-parameters-in-translation-strings
+
+##### Refernces
+
+https://spatie.be/docs/laravel-permission/v5/installation-laravel
+https://github.com/spatie/laravel-permission
