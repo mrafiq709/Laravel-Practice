@@ -11,5 +11,4 @@
 |
 */
 
-include('api/auth.php');
 include('api/user.php');

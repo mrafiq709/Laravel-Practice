@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ApiRequest;
 use App\Http\Requests\User\IndexUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Services\User\IndexUserService;
@@ -75,4 +76,16 @@ class UserController extends Controller
 
         return responder()->toJson();
     }
+
+    /**
+    * Me
+    *
+    * @param  ApiRequest $request
+    * @return \Illuminate\Http\Response
+    */
+   public function me(ApiRequest $request)
+   {
+       responder()->success($request->user()->toArray());
+       return responder()->toJson();
+   }
 }

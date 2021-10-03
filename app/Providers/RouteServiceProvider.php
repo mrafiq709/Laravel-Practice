@@ -46,7 +46,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapRegisterRoutes();
     }
 
     /**
@@ -74,7 +74,21 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
             ->middleware('api')
+            ->middleware('auth:api')
             // ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Define the "register" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapRegisterRoutes()
+    {
+        Route::middleware('oauth')
+            ->group(base_path('routes/oauth.php'));
     }
 }

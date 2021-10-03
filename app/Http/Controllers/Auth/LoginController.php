@@ -52,11 +52,11 @@ class LoginController extends Controller
             return response(['message' => 'Invalid credential']);
         }
 
-        $user = User::find(Auth::user()->id);
-        $accesstoken = $user->createToken('authTokenn')->accessToken;
+        // $user = User::find(Auth::user()->id);
+        // $accesstoken = $user->createToken('authTokenn')->accessToken;
 
         responder()->success(['user' => Auth::user()]);
-        responder()->addData(['access_token' => $accesstoken]);
+        // responder()->addData(['access_token' => $accesstoken]);
 
         return responder()->toJson();
     }
