@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Guards\ClientGuard;
+use Illuminate\Auth\RequestGuard;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -26,5 +30,32 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //
+    }
+
+    /**
+     * Register the service provider.
+     */
+    public function register()
+    {
+        $this->registerGuard();
+    }
+
+    /**
+     * Register the Authenticator.
+     *
+     * @return void
+     */
+    protected function registerGuard()
+    {
+        Auth::extend('client-guard', function (Application $app) {
+
+            /** @var Request $request */
+            $request = $app->get('request');
+            return new RequestGuard(function (Request $request) {
+                $guard = new ClientGuard($request);
+
+                return $guard->user();
+            }, $request);
+        });
     }
 }

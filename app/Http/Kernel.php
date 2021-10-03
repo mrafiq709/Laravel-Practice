@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\AuthKey;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Routing\Middleware\SubstituteBindings;
 
 class Kernel extends HttpKernel
 {
@@ -37,14 +38,20 @@ class Kernel extends HttpKernel
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            SubstituteBindings::class,
         ],
 
         'api' => [
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\AuthBasic::class,
-            \App\Http\Middleware\AuthKey::class,
+            AuthKey::class,
+        ],
+
+        'client-api' => [
+            //'throttle:60,1',
+            'auth:api',
+            SubstituteBindings::class,
         ],
     ];
 
