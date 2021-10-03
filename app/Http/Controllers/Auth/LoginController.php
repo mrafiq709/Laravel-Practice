@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,8 +52,12 @@ class LoginController extends Controller
             return response(['message' => 'Invalid credential']);
         }
 
-        $accesstoken = Auth::user()->createToken('authTokenn')->accessToken;
+        $user = User::find(Auth::user()->id);
+        $accesstoken = $user->createToken('authTokenn')->accessToken;
 
-        return response(['user' => Auth::user(), 'access_token' => $accesstoken]);
+        responder()->success(['user' => Auth::user()]);
+        responder()->addData(['access_token' => $accesstoken]);
+
+        return responder()->toJson();
     }
 }

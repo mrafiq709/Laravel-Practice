@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Copyright (c) 2019.
- * Simon
+ * Copyright (c) 2021.
+ * Rafiq
  */
 
 namespace App\Repositories\Criteria;
 
-use App\Http\Requests\ClientApiRequest;
+use App\Http\Requests\ApiRequest;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Prettus\Repository\Contracts\RepositoryInterface;
@@ -28,12 +28,12 @@ class WhereCriteria extends WhereByRequestCriteria
     /**
      * SortCriteria constructor.
      *
-     * @param ClientApiRequest $request
+     * @param ApiRequest $request
      * @param string|array     $field
      * @param mixed            $value
      * @param string           $operator
      */
-    public function __construct($field, $value, string $operator = '=', ClientApiRequest $request = null)
+    public function __construct($field, $value, string $operator = '=', ApiRequest $request = null)
     {
         parent::__construct($field, $operator, $request);
 

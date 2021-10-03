@@ -25,10 +25,14 @@ class UpdateUserService extends UserService
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->name = $request->name;
+        if(isset($request->name))
+            $user->name = $request->name;
+        if(isset($request->email))
+            $user->email = $request->email;
+            
         $user->save();
 
-        return response()->json($user->toArray());
+        responder()->success($user->toArray());
     }
 }
 

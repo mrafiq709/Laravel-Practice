@@ -21,7 +21,8 @@ class UserController extends Controller
      */
     public function index(IndexUserRequest $request, IndexUserService $service)
     {
-        return $service->index($request);
+        $service->index($request);
+        return responder()->toJson();
     }
 
     /**
@@ -32,7 +33,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return response()->json($user->toArray());
+        responder()->success($user->toArray());
+        return responder()->toJson();
     }
 
     /**
@@ -55,7 +57,8 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user, UpdateUserService $service)
     {
-        return $service->update($request, $user);
+        $service->update($request, $user);
+        return responder()->toJson();
     }
 
     /**
@@ -66,7 +69,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return response()->json($user->toArray());
+        $ok = $user->delete();
+        responder()->success($user->toArray());
+        responder()->addData(['deleted' => $ok]);
+
+        return responder()->toJson();
     }
 }

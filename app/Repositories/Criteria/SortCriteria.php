@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright (c) 2019.
- * Simon
+ * Copyright (c) 2021.
+ * Rafiq
  */
 
 namespace App\Repositories\Criteria;

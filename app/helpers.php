@@ -5,8 +5,16 @@
  * Rafiq
  */
 
+use App\Services\RespondService;
 use Symfony\Component\VarDumper\VarDumper;
 
+/**
+ * @return RespondService
+ */
+function responder()
+{
+    return app(RespondService::class);
+}
 
 /**
  * @return bool

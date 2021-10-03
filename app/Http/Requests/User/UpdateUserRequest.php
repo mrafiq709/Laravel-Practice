@@ -25,6 +25,7 @@ class UpdateUserRequest extends ApiRequest
     {
         return [
             'name' => 'string|max:5',
+            'email' => 'email'
         ];
     }
 }

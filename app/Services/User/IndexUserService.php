@@ -28,7 +28,6 @@ class IndexUserService extends UserService
          * @var Collection $paginate
          */
         $paginate = $this->repository->paginate($request->perPage());
-
-        return response()->json($paginate->toArray());
+        responder()->success($paginate->toArray());
     }
 }
