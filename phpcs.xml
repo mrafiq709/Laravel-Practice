@@ -29,6 +29,8 @@
 <rule ref="Squiz.Commenting.DocCommentAlignment"/>
 
 <!-- <file>routes/api.php</file>     -->
+<exclude-pattern>app</exclude-pattern> 
+<exclude-pattern>_ide_helper.php</exclude-pattern>    
 <exclude-pattern>vendor</exclude-pattern>    
 <exclude-pattern>resources</exclude-pattern>    
 <exclude-pattern>database/</exclude-pattern>    
