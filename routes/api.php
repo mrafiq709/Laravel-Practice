@@ -12,3 +12,5 @@
 */
 
 include('api/user.php');
+include('api/vidly/genre.php');
+include('api/vidly/movie.php');

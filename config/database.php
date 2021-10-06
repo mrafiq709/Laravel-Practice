@@ -63,6 +63,18 @@ return [
             ]) : [],
         ],
 
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => [env('MONGO_DB_HOST', '127.0.0.1'), env('MONGO_DB_HOST_2', '127.0.0.1')],
+            'port'     => env('MONGO_DB_PORT', 27017),
+            'database' => env('MONGO_DB_DATABASE', Str::slug(config('app.name') . '_' . config('app.env'))),
+            'username' => env('MONGO_DB_USER'),
+            'password' => env('MONGO_DB_PASS'),
+            'options'  => [
+                'database'       => env('MONGO_DB_DATABASE', Str::slug(config('app.name') . '_' . config('app.env')))
+            ],
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
