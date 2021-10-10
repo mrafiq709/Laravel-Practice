@@ -21,7 +21,7 @@ use Jenssegers\Mongodb\Eloquent\SoftDeletes;
  * @property int            $stock
  * @property float          $rate
  * @property bool           $liked
- * @property string         $genre_id
+ * @property Genre          $genre
  * @property Carbon         $deleted_at
  * @property Carbon         $created_at
  * @property Carbon         $updated_at

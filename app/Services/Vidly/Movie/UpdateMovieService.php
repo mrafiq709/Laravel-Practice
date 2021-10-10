@@ -7,29 +7,25 @@
 
 namespace App\Services\Vidly\Movie;
 
-use App\Http\Requests\Vidly\Movie\CreateMovieRequest;
+use App\Http\Requests\Vidly\Movie\UpdateMovieRequest;
 use App\Models\Vidly\Genre;
+use App\Models\Vidly\Movie;
 
 /**
- * Class CreateMovieService
+ * Class UpdateMovieService
  * 
  * @package App\Services\Vidly\Movie
  */
-class CreateMovieService extends MovieService 
+class UpdateMovieService extends MovieService 
 {
 
     /**
-     * Create Movie
+     * Update Movie
      * 
-     * @param CreateMovieRequest $request
+     * @param UpdateMovieRequest $request
      */
-    public function store(CreateMovieRequest $request)
+    public function update(UpdateMovieRequest $request, Movie $movie)
     {
-        $movie = $this->repository->firstOrNew([
-            'title' => $request->title
-        ]);
-        
-        $movie->creator = isset($request->user()->id) ? $request->user()->id : 5;
         $movie->title = $request->title;
         $movie->stock = $request->stock;
         $movie->rate = $request->rate;

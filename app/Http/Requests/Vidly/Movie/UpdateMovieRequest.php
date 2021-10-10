@@ -3,10 +3,13 @@
 namespace App\Http\Requests\Vidly\Movie;
 
 use App\Http\Requests\ApiRequest;
-use Illuminate\Database\Query\Builder;
+use App\Models\Vidly\Movie;
 use Illuminate\Validation\Rule;
 
-class CreateMovieRequest extends ApiRequest
+/**
+ * @property-read Movie $movie
+ */
+class UpdateMovieRequest extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,19 +30,12 @@ class CreateMovieRequest extends ApiRequest
     {
         return [
             'title' => [
-                'required',
                 'string',
-                Rule::unique('mongodb.movies', 'title')
+                Rule::unique('mongodb.movies', 'title')->ignore($this->movie),
             ],
-            'stock' => 'required|numeric',
-            'rate' => [
-                'required',
-                'numeric',
-                'min:1',
-                'max:10',
-                'regex:/^\d+(\.\d{1,2})?$/'
-            ],
-            'genre_id' => 'required|string',
+            'stock' => 'numeric',
+            'rate' => ['numeric', 'min:1','max:10', 'regex:/^\d+(\.\d{1,2})?$/'],
+            'genre_id' => 'string',
         ];
     }
 }

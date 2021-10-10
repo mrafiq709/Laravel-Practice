@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Vidly;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ApiRequest;
 use App\Http\Requests\Vidly\Genre\CreateGenreRequest;
 use App\Http\Requests\Vidly\Genre\IndexGenreRequest;
+use App\Models\Vidly\Genre;
 use App\Services\Vidly\Genre\CreateGenreService;
 use App\Services\Vidly\Genre\IndexGenreService;
 
@@ -35,6 +37,21 @@ class GenreController extends Controller
     public function index(IndexGenreRequest $request, IndexGenreService $service)
     {
         $service->index($request);
+        return responder()->toJson();
+    }
+
+    /**
+     * Show Genre.
+     * 
+     * @param ApiRequest    $request
+     * @param Genre         $genre
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(ApiRequest $request, string $genre)
+    {
+        $genre = Genre::find($genre);
+        responder()->success($genre->toArray());
         return responder()->toJson();
     }
 }
