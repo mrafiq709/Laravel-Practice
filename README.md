@@ -1,6 +1,30 @@
 # Laravel-Practice
 Laravel Template
 
+Install PHP
+--------------
+```
+sudo apt update
+sudo apt install php
+
+sudo apt update
+sudo apt install php-fpm
+
+systemctl status php7.4-fpm
+```
+
+Install node & npm
+--------------------
+```
+sudo apt update && sudo apt install curl -y
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+source ~/.profile 
+nvm ls-remote
+nvm install v14.16.0
+nvm list
+```
+Change version
+  nvm use v15.12.0 
 
 Access PHP Object in Javascript
 ------------------------------------
