@@ -24,8 +24,9 @@ nvm install v14.16.0
 nvm list
 ```
 Change version
-  nvm use v15.12.0 
-
+```
+nvm use v15.12.0 
+```
 Access PHP Object in Javascript
 ------------------------------------
 
