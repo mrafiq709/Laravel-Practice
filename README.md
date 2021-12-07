@@ -80,6 +80,7 @@ config.php file
 ```
 https://laravel.com/docs/8.x/localization#replacing-parameters-in-translation-strings
 
-###### laravel required form request
+laravel required form request
+---------------------------------
 https://techsemicolon.github.io/blog/2019/05/30/laravel-validation-required-if-with-unless-all-and-custom-if/
 
