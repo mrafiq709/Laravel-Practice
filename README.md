@@ -85,9 +85,6 @@ modules:
   ---------------
   ```
   composer require codeception/module-laravel5 --dev
-  composer require codeception/module-phpbrowser --dev
-  composer require codeception/module-asserts --dev
-  composer require codeception/module-rest --dev
   vendor/bin/codecept build
   ```
   Unit Tests:
@@ -122,11 +119,11 @@ vendor/bin/codecept run unit --coverage-html
 ```
 API Test:
 ----------
-composer.json:
-```json
-    "require-dev": {
-        "codeception/module-rest": "^1.3",
-    }
+
+```
+  composer require codeception/module-phpbrowser --dev
+  composer require codeception/module-asserts --dev
+  composer require codeception/module-rest --dev
 ```
 
 Configure **tests/api.suite.yml**:
@@ -292,6 +289,58 @@ class ApiTester extends Actor
         $client = new Client(['handler' => $handler]);
         $this->bindInstance(Client::class, $client);
     }
+    
+    /**
+     *
+     * @throws Exception
+     */
+    public function setToken(bool $superAdmin = false)
+    {
+        $user = factory(User::class)->create();
+
+        if($superAdmin)
+        {
+            $user->email = 'islam@funtap.vn';
+            $user->save();
+        }
+
+        $token = $this->generateToken($user);
+
+        $this->haveHttpHeader('Authorization', "Bearer $token");
+        $this->setHeaders();
+    }
+
+    public function setHeaders()
+    {
+        $this->haveHttpHeader('accept', 'application/json');
+        $this->haveHttpHeader('content-type', 'application/json');
+    }
+
+
+    /**
+     * @param User $user
+     *
+     * @return string
+     */
+    public function generateToken(User $user): string
+    {
+        $keyName = sprintf('passport-public-key' . DIRECTORY_SEPARATOR . '%s-oauth-private.key', config('app.env'));
+        $keyPath = storage_path($keyName);
+
+        return JWT::encode(
+            [
+                'aud'    => $user->id,
+                'iat'    => time(),
+                'nbf'    => time(),
+                'exp'    => time() + 60 * 60,
+                'sub'    => $user->id,
+                'scopes' => [],
+                'user'   => $user->toArray(),
+            ],
+            file_get_contents($keyPath),
+            'RS256'
+        );
+    }
 
     /**
      * [!] Method is generated. Documentation taken from corresponding module.
@@ -336,15 +385,19 @@ class CreateUserCest
      * @var false|string|null
      */
     private $token;
+    private $user;
 
     public function _before(ApiTester $I)
     {
-        $this->token = $I->getAccessToken();
+        $I->setToken(true);
+        $this->user = User::all()->first();
+        
+        // $this->token = $I->getAccessToken();
 
-        $I->httpHeader($this->token);
+        // $I->httpHeader($this->token);
 
-        $faker = Factory::create();
-        $I->mockUser($faker);
+        // $faker = Factory::create();
+        // $I->mockUser($faker);
     }
 
     /**
