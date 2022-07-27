@@ -85,6 +85,9 @@ modules:
   ---------------
   ```
   composer require codeception/module-laravel5 --dev
+  composer require codeception/module-phpbrowser --dev
+  composer require codeception/module-asserts --dev
+  composer require codeception/module-rest --dev
   vendor/bin/codecept build
   ```
   Unit Tests:
